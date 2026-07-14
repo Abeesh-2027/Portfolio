@@ -109,19 +109,21 @@ if (isFinePointer) {
   window.addEventListener('mouseup', () => glow.classList.remove('click'));
 }
 
-// Contact form (front-end only demo handling)
-const form = document.getElementById('contact-form');
-if (form) {
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const btn = form.querySelector('.send-btn');
-    const original = btn.innerHTML;
-    btn.innerHTML = '<i class="fa-solid fa-check"></i>Message Sent';
-    btn.style.pointerEvents = 'none';
-    setTimeout(() => {
-      btn.innerHTML = original;
-      btn.style.pointerEvents = 'auto';
-      form.reset();
-    }, 2200);
-  });
-}
+window.formspree = window.formspree || function () {
+    (formspree.q = formspree.q || []).push(arguments);
+};
+
+formspree("initForm", {
+    formElement: "#contact-form",
+    formId: "xqeraqqj"
+});
+
+const form = document.getElementById("contact-form");
+
+form.addEventListener("submit", function (e) {
+    // Optional: prevent page reload
+    // e.preventDefault();
+
+    document.getElementById("success").innerHTML =
+        "<div class='success-msg'><i class='fa-solid fa-circle-check'></i> Message Sent Successfully!</div>";
+});
